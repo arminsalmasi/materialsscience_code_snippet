@@ -18,8 +18,8 @@ output_path = "C:\\...\\"+folder_name+"\\processed\\";
 file_type=".tif";
 treshhold_1=0;
 treshhold_2=160;
-number_of_y_slices=10;
-number_of_x_slices=5;
+number_of_y_slices=20;
+number_of_x_slices=20;
 cut_scalebar=150; //cut the scalebar//
 
 
@@ -30,10 +30,8 @@ setOption("ExpandableArrays", true);
 
 //creat output_path folder//
 File.makeDirectory(output_path);
-Array.print(subfolders);
 //loop over subfolders//
 for (subfolder = 0; subfolder <= subfolders.length-1; subfolder++) {
-	print(subfolder,subfolders[subfolder]);
 	file_list = getFileList(input_path+subfolders[subfolder]);
 	File.makeDirectory(output_path+subfolders[subfolder]);
 	
@@ -49,7 +47,6 @@ for (subfolder = 0; subfolder <= subfolders.length-1; subfolder++) {
 		}
 	
 	//loop over images in the subfolder 
-	Array.print(images);
 	for (image = 0; image < images.length; image++) 
 		loop_over_images(input,output,treshhold_1,treshhold_2,images[image],number_of_y_slices,number_of_x_slices,cut_scalebar,file_type);
 	if (isOpen("Results")) {
@@ -83,7 +80,6 @@ function action(x,y,dx,dy,counter,path,type,orig,imagename,slicenumber) {
 	run("Convert to Mask");
 	// // //id1= getImageID();
 	setResult("Label",slicenumber,substring(imagename,0,lengthOf(imagename)-4)+"-"+(slicenumber+1));
-	print(substring(imagename,0,lengthOf(imagename)-4)+"-"+(slicenumber+1));
     updateResults();
 	saveAs(path+'\\'+substring(imagename,0,lengthOf(imagename)-4)+"-"+(slicenumber+1)+"-pr"+type);
 }
